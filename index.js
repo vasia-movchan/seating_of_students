@@ -210,6 +210,26 @@ placeBtn.addEventListener('click', () => {
                 if (idx === shuffled.length - 1) {
                     placeBtn.disabled = false;
                     placeBtn.classList.remove('disabled');
+
+                    // Зберігаємо відповідність учень — номер парти
+                    let result = '';
+                    deskCards.forEach((card, i) => {
+                        const nameDiv = card.querySelector('.student-name');
+                        if (nameDiv) {
+                            result += `${nameDiv.textContent} - парта №${i + 1}\r\n`;
+                        }
+                    });
+
+                    // Створюємо файл для завантаження
+                    const blob = new Blob([result], { type: 'text/plain' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'seating.txt';
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
                 }
             }, idx * 1000);
         }
