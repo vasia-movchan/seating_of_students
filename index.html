@@ -4,45 +4,19 @@
         <meta charset="UTF-8" />
         <title>Розсадка учнів</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
         <div class="container">
-            <h1>Розсадка учнів</h1>
-            <form id="seatingForm">
-                <label for="students">Список учнів (через кому):</label>
-                <textarea id="students" rows="4" placeholder="Іван, Марія, Петро, ..."></textarea>
-                <label for="rows">Кількість рядів:</label>
-                <input type="number" id="rows" min="1" value="3" />
-                <label for="cols">Кількість місць у ряді:</label>
-                <input type="number" id="cols" min="1" value="4" />
-                <button type="submit">Створити розсадку</button>
-            </form>
-            <div class="result" id="result"></div>
+            <div class="cards-list" id="cards-list"></div>
         </div>
-        <script>
-            document.getElementById('seatingForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const students = document
-                    .getElementById('students')
-                    .value.split(',')
-                    .map((s) => s.trim())
-                    .filter((s) => s);
-                const rows = parseInt(document.getElementById('rows').value, 10);
-                const cols = parseInt(document.getElementById('cols').value, 10);
-                let html = '<table border="1" cellpadding="8" style="border-collapse:collapse;width:100%">';
-                let idx = 0;
-                for (let r = 0; r < rows; r++) {
-                    html += '<tr>';
-                    for (let c = 0; c < cols; c++) {
-                        html += `<td>${students[idx] ? students[idx] : ''}</td>`;
-                        idx++;
-                    }
-                    html += '</tr>';
-                }
-                html += '</table>';
-                document.getElementById('result').innerHTML = html;
-            });
-        </script>
+        <div class="desks-container">
+            <button class="place-btn">Розмістити</button>
+            <div class="cards-list" id="numbers-list"></div>
+        </div>
+        <script src="index.js"></script>
     </body>
 </html>
